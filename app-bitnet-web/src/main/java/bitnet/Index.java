@@ -1,15 +1,13 @@
 package bitnet;
 
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import javax.faces.annotation.FacesConfig;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
 
-@Named(value = "Index")
-@ViewScoped
-@FacesConfig(version = javax.faces.annotation.FacesConfig.Version.JSF_2_3)
+@ManagedBean(name = "Index")
+@SessionScoped
 public class Index implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     private Long id_usuario;
     private String nombre_usuario;
