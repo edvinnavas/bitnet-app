@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta name="viewport" content="text/html; charset=UTF-8; width=device-width; initial-scale=1.0" http-equiv="Content-Type"/>
+            <title>.:Bitnet-App:.</title>
+        </f:facet>
+    </h:head>
+
+    <h:body>
+        <h:form id="formIndex" style="font-size: 12px;">
+            <p:dataTable var="credential" value="#{Index.lst_rest_credential}">
+                <p:column headerText="Id-Rest-Credential">
+                    <h:outputText value="#{credential.id_rest_credential}" />
+                </p:column>
+                <p:column headerText="Usuario">
+                    <h:outputText value="#{credential.usuario}" />
+                </p:column>
+                <p:column headerText="Contraseña">
+                    <h:outputText value="#{credential.contrasena}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
