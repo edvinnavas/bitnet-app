@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta name="viewport" content="text/html; charset=UTF-8; width=device-width; initial-scale=1.0" http-equiv="Content-Type"/>
+            <title>.:BITNET-APP:.</title>
+        </f:facet>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="85" resizable="false" closable="false" collapsible="false" style="text-align:left; padding-left:20px;">
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="BITNET-APP" style="font-size:30px; font-weight:bold; color:maroon;"/>
+                    <p:outputLabel value="#{Index.nombre_usuario}" style="font-size:15px; font-weight:bold; color:red;"/>
+                </h:panelGrid>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" header="MENU PRINCIPAL" collapsible="true" style="font-size:16px; font-weight:bold;">
+                <h:form id="formMenu">
+                    <p:growl id="mensaje" showDetail="true"/>
+                    <p:panelMenu style="width:215px;">
+                        <p:submenu label="Administración" style="font-size:14px; font-weight:bold;">
+                            <p:menuitem id="menuAdministracionInicio" value="Inicio" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuAdministracionMenu" value="Menu" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuAdministracionMenuItem" value="Menu-Item" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuAdministracionUsuarios" value="Usuarios" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuAdministracionPermisosUsuario" value="Permisos de usuario" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuAdministracionCambioContrasena" value="Cambio de contraseña" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuAdministracionSalir" value="Salir" style="font-size:12px; font-weight:bold; color:blue;"/>
+                        </p:submenu>
+                        <p:submenu label="Facturación" style="font-size:14px; font-weight:bold;">
+                            <p:menuitem id="menuFacturacion1" value="Facturación menu 1" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuFacturacion2" value="Facturación menu 2" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuFacturacion3" value="Facturación menu 3" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuFacturacion4" value="Facturación menu 4" style="font-size:12px; font-weight:bold; color:blue;"/>
+                            <p:menuitem id="menuFacturacion5" value="Facturación menu 5" style="font-size:12px; font-weight:bold; color:blue;"/>
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:include id="ui1" src="#{Index.pagina_seleccionada}"/>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
