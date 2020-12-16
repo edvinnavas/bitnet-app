@@ -14,10 +14,12 @@
     <h:body>
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="85" resizable="false" closable="false" collapsible="false" style="text-align:left; padding-left:20px;">
-                <h:panelGrid columns="1">
-                    <p:outputLabel value="BITNET-APP" style="font-size:30px; font-weight:bold; color:maroon;"/>
-                    <p:outputLabel value="#{Index.nombre_usuario}" style="font-size:15px; font-weight:bold; color:red;"/>
-                </h:panelGrid>
+                <h:form id="formEncabezado">
+                    <h:panelGrid columns="1">
+                        <p:outputLabel value="BITNET-APP" style="font-size:30px; font-weight:bold; color:maroon;"/>
+                        <p:outputLabel id="lbUsuario" value="#{Index.nombre_usuario}" style="font-size:15px; font-weight:bold; color:red;"/>
+                    </h:panelGrid>
+                </h:form>
             </p:layoutUnit>
             <p:layoutUnit position="west" header="MENU PRINCIPAL" collapsible="true" style="font-size:16px; font-weight:bold;">
                 <h:form id="formMenu">
@@ -46,5 +48,19 @@
                 <ui:include id="ui1" src="#{Index.pagina_seleccionada}"/>
             </p:layoutUnit>
         </p:layout>
+        <p:dialog header="Login" widgetVar="dlg" resizable="false">
+            <h:form id="formDialogLogIn">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="txtUsuario" value="Usuario:"/>
+                    <p:inputText id="txtUsuario" value="#{Index.nombre_usuario}" required="true" label="txtUsuario"/>
+                    <h:outputLabel for="txtContrasena" value="Contraseña:"/>
+                    <p:password id="txtContrasena" value="#{userLoginView.password}" required="true" label="txtContrasena"/>                
+                    <f:facet name="footer">
+                        <p:commandButton id="btnLogIn" value="Login" update="formMenu:mensaje, formEncabezado:lbUsuario"/>
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
     </h:body>
 </html>

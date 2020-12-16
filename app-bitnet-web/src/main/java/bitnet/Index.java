@@ -11,11 +11,13 @@ public class Index implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id_usuario;
     private String nombre_usuario;
+    private String contrasena;
     private String pagina_seleccionada;
     
     public Index() {
         this.id_usuario = new Long(0);
         this.nombre_usuario = "No autenticado";
+        this.contrasena = "";
         this.pagina_seleccionada = "inicio";
     }
 
@@ -41,6 +43,14 @@ public class Index implements Serializable {
 
     public void setPagina_seleccionada(String pagina_seleccionada) {
         this.pagina_seleccionada = pagina_seleccionada;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
     
 }
