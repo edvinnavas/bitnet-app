@@ -1,11 +1,20 @@
 package bitnet;
 
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+import org.primefaces.PrimeFaces;
 
 @ManagedBean(name = "Index")
-@SessionScoped
+@ViewScoped
 public class Index implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,10 +24,52 @@ public class Index implements Serializable {
     private String pagina_seleccionada;
     
     public Index() {
-        this.id_usuario = new Long(0);
-        this.nombre_usuario = "No autenticado";
-        this.contrasena = "";
-        this.pagina_seleccionada = "inicio";
+        try {
+            Context initContext = new InitialContext();
+            DataSource ds = (DataSource) initContext.lookup("java:/comp/env/jdbc_mysql");
+            Connection conn = ds.getConnection();
+            
+            // InitialContext ctx = new InitialContext();
+            // Context env = (Context) ctx.lookup("java:comp/env");
+            // DataSource ds = (DataSource) env.lookup("jdbc_mysql");
+            // Connection conn = ds.getConnection();
+            
+            String cadenasql = "SELECT u.id_usuario, u.nombre_completo FROM usuario u WHERE u.id_usuario=1";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(cadenasql);
+            while(rs.next()) {
+                this.id_usuario = rs.getLong(1);
+                this.nombre_usuario = rs.getString(2);
+            }
+            rs.close();
+            stmt.close();
+            
+            conn.close();
+            
+            this.contrasena = "No Password";
+            this.pagina_seleccionada = "inicio";
+        } catch(Exception ex) {
+            System.out.println("ERROR: (" + this.getClass().getName() + ")(" + ex.toString() + ")");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de apliación", ex.toString()));
+        }
+    }
+    
+    public void mostrar_dialog_login() {
+        try {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensaje de apliación", "Autenticación de usuario."));
+            PrimeFaces.current().executeScript("PF('dialogLoginVar').show();");
+        } catch(Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de apliación", ex.toString()));
+        }
+    }
+    
+    public void login() {
+        try {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensaje de apliación", "Autenticación de usuario."));
+            PrimeFaces.current().executeScript("PF('dialogLoginVar').hide();");
+        } catch(Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de apliación", ex.toString()));
+        }
     }
 
     public Long getId_usuario() {

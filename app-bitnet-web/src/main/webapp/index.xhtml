@@ -22,7 +22,7 @@
                         <p:outputLabel id="lbUsuario" value="#{Index.nombre_usuario}" style="font-size:15px; font-weight:bold; color:red;"/>
                     </div>
                     <div style="float: left; padding-left:5px;">
-                        <p:commandButton id="btnLogIn" value="LogIn" style="font-size:12px;" onclick="PF('dlg').show();"/>
+                        <p:commandButton id="btnLogIn" value="LogIn" icon="ui-icon-circle-check" actionListener="#{Index.mostrar_dialog_login}" style="font-size:12px;" update="dialogLogin,:formDialogLogin,:formMenu:mensaje"/>
                     </div>
                 </h:form>
             </p:layoutUnit>
@@ -54,15 +54,18 @@
             </p:layoutUnit>
         </p:layout>
         
-        <p:dialog header="Login" widgetVar="dlg" resizable="false" style="font-size:12px; font-weight:bold;">
-            <h:form id="formDialogLogIn">
+        <p:dialog id="dialogLogin" header="Login" widgetVar="dialogLoginVar" resizable="false" style="font-size:12px; font-weight:bold;">
+            <h:form id="formDialogLogin">
                 <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputLabel for="txtUsuario" value="Usuario:" style="font-size:12px; font-weight:bold;"/>
-                    <p:inputText id="txtUsuario" value="#{Index.nombre_usuario}" required="true" label="txtUsuario" style="font-size:12px;"/>
-                    <h:outputLabel for="txtContrasena" value="Contraseña:" style="font-size:12px; font-weight:bold;"/>
-                    <p:password id="txtContrasena" value="#{userLoginView.password}" required="true" label="txtContrasena" style="font-size:12px;"/>
+                    <p:outputLabel value="Usuario" style="font-size:12px; font-weight:bold;"/>
+                    <p:inputText id="txtUsuario" value="#{Index.nombre_usuario}" required="true" style="font-size:12px;"/>
+                    <p:outputLabel value="Contraseña" style="font-size:12px; font-weight:bold;"/>
+                    <p:password id="txtContrasena" value="#{Index.contrasena}" style="font-size:12px;"/>
                     <f:facet name="footer">
-                        <p:commandButton id="btnLogIn" value="Login" update="formMenu:mensaje, formEncabezado:lbUsuario" style="font-size:12px;"/>
+                        <div align="right">
+                            <p:commandButton id="btnLogIn" value="Login" icon="ui-icon-circle-check" actionListener="#{Index.login}" style="font-size:12px; font-weight:bold;" update=":formMenu:mensaje"/>
+                            <p:commandButton id="btnCerrar" value="Cerrar" icon="ui-icon-close" oncomplete="PF('dialogLoginVar').hide();" style="font-size:12px; font-weight:bold;"/>
+                        </div>
                     </f:facet>
                 </h:panelGrid>
             </h:form>
